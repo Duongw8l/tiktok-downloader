@@ -1,0 +1,13 @@
+venv/
+__pycache__/
+*.pyc
+.env
+.dist/
+dist/
+build/
+downloads/
+*.log
+.DS_Store
+tiksnap_web/
+.idea/
+.vscode/
