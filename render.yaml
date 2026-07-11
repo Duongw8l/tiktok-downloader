@@ -3,8 +3,12 @@ services:
     name: tiksnap
     runtime: python
     plan: free
+    region: singapore
+    branch: main
     buildCommand: pip install -r requirements-web.txt
     startCommand: gunicorn wsgi:app --bind 0.0.0.0:$PORT --timeout 120 --workers 1 --threads 4
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
     envVars:
       - key: PYTHON_VERSION
         value: "3.12.0"
