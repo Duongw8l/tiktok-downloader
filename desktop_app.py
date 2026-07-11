@@ -60,7 +60,7 @@ def main():
 
     # Icon của cửa sổ Windows lấy từ TikSnap.exe (đã embed tiksnap.ico lúc build)
     webview.create_window(
-        title="TikSnap — Tải TikTok không watermark",
+        title="TikSnap — TikTok / Instagram / Facebook / YouTube",
         url=url,
         width=980,
         height=820,

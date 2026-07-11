@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TikSnap • Tải TikTok Không Watermark</title>
+    <title>TikSnap • Tải video TikTok / IG / FB / YouTube</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
@@ -41,7 +41,7 @@
                 </div>
                 <div>
                     <span class="logo-font text-2xl font-bold tracking-tighter">TikSnap</span>
-                    <span class="text-xs text-zinc-500 block -mt-1">Không Watermark</span>
+                    <span class="text-xs text-zinc-500 block -mt-1">TikTok · IG · FB · YouTube</span>
                 </div>
             </div>
             <div class="px-3 py-1.5 bg-zinc-950 border border-zinc-700 rounded-full text-xs flex items-center gap-x-2">
@@ -54,14 +54,14 @@
     <!-- Hero -->
     <div class="max-w-3xl mx-auto px-6 pt-16 pb-10 text-center">
         <div class="inline-flex items-center gap-x-2 px-4 py-1.5 bg-zinc-900 border border-zinc-800 rounded-full mb-6">
-            <span class="text-emerald-400 text-sm font-medium">Miễn phí • Không giới hạn • Không watermark</span>
+            <span class="text-emerald-400 text-sm font-medium">TikTok · Instagram · Facebook · YouTube</span>
         </div>
         <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tighter leading-none mb-4">
-            Tải video TikTok<br>
-            <span class="tiktok-gradient">không logo</span>
+            Tải video online<br>
+            <span class="tiktok-gradient">1 click</span>
         </h1>
-        <p class="text-lg sm:text-xl text-zinc-400 max-w-md mx-auto">
-            Dán link TikTok → Tải ngay video gốc chất lượng cao, không watermark
+        <p class="text-lg sm:text-xl text-zinc-400 max-w-lg mx-auto">
+            Dán link TikTok, Instagram, Facebook hoặc YouTube → Tải MP4 về máy
         </p>
     </div>
 
@@ -70,17 +70,22 @@
         <div class="glass border border-zinc-700 shadow-2xl shadow-black/50 rounded-3xl p-2">
             <div class="bg-zinc-900 rounded-[20px] p-6 sm:p-8">
                 <div class="flex items-center gap-x-3 mb-6">
-                    <i class="fa-brands fa-tiktok text-3xl text-pink-500"></i>
+                    <div class="flex -space-x-1 text-xl">
+                        <i class="fa-brands fa-tiktok text-pink-500"></i>
+                        <i class="fa-brands fa-instagram text-fuchsia-400"></i>
+                        <i class="fa-brands fa-facebook text-blue-400"></i>
+                        <i class="fa-brands fa-youtube text-red-500"></i>
+                    </div>
                     <div>
-                        <div class="font-semibold">Dán link video TikTok</div>
-                        <div class="text-xs text-zinc-500">Hỗ trợ vm.tiktok.com, vt.tiktok.com, www.tiktok.com</div>
+                        <div class="font-semibold">Dán link video</div>
+                        <div class="text-xs text-zinc-500">TikTok · Instagram Reel · Facebook · YouTube / Shorts</div>
                     </div>
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-3">
                     <input id="urlInput"
                            type="text"
-                           placeholder="https://www.tiktok.com/@username/video/1234567890"
+                           placeholder="https://... (TikTok / Instagram / Facebook / YouTube)"
                            class="flex-1 bg-zinc-950 border border-zinc-700 focus:border-pink-500 transition-colors px-5 py-4 rounded-2xl text-sm outline-none text-zinc-100">
                     <button id="analyzeBtn" onclick="analyzeVideo()"
                             class="px-8 py-4 bg-white hover:bg-zinc-100 active:bg-zinc-200 transition-all text-zinc-950 font-semibold rounded-2xl flex items-center justify-center gap-x-2 whitespace-nowrap disabled:opacity-50">
@@ -126,7 +131,7 @@
                 <button id="btnVideo" onclick="downloadVideo()"
                         class="w-full py-4 bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 transition-all text-white font-semibold rounded-2xl flex items-center justify-center gap-x-3 text-base disabled:opacity-50">
                     <i class="fa-solid fa-download"></i>
-                    <span>TẢI VIDEO MP4 (Không Watermark)</span>
+                    <span>TẢI VIDEO MP4</span>
                 </button>
                 <p class="text-[11px] text-zinc-500 text-center">
                     <span id="saveHint">File sẽ tải về máy bạn (thư mục Downloads)</span>
@@ -146,7 +151,7 @@
 
     <!-- Footer note -->
     <div class="max-w-xl mx-auto px-6 mt-16 mb-10 text-center text-xs text-zinc-600">
-        Dùng cho mục đích cá nhân. Không re-upload nội dung người khác. Có thể vi phạm ToS TikTok.
+        Dùng cho mục đích cá nhân. Không re-upload nội dung người khác. Có thể vi phạm ToS từng nền tảng.
     </div>
 
     <script>
@@ -173,7 +178,7 @@
             const url = input.value.trim();
 
             if (!url) {
-                alert('Vui lòng dán link TikTok');
+                alert('Vui lòng dán link TikTok / Instagram / Facebook / YouTube');
                 return;
             }
 
@@ -193,7 +198,8 @@
 
                 document.getElementById('thumbnail').src = data.thumbnail || 'https://picsum.photos/id/1015/300/300';
                 document.getElementById('videoTitle').innerText = data.title;
-                document.getElementById('videoAuthor').innerText = '@' + data.uploader;
+                const plat = data.platform ? ` · ${data.platform}` : '';
+                document.getElementById('videoAuthor').innerText = '@' + data.uploader + plat;
                 document.getElementById('videoDuration').innerHTML = formatDuration(data.duration);
                 document.getElementById('videoViews').innerHTML = data.view_count
                     ? `<i class="fa-solid fa-eye"></i> ${Number(data.view_count).toLocaleString()}`
